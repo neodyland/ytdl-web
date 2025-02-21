@@ -56,7 +56,7 @@ with gr.Blocks(title="Simple Youtube Downloader GUI") as demo:
                 if not path or path == "":
                     return gr.Text("Nothing to show for now...")
                 if audio:
-                    return gr.Audio(value=path)
+                    return gr.Audio(value=path, type="filepath")
                 else:
                     return gr.Video(value=path)
 
