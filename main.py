@@ -10,10 +10,11 @@ def download(url: str, audio_only: bool, state: List[str]) -> Tuple[str, List[st
         return
     if not tmp.exists():
         tmp.mkdir(exist_ok=True, parents=True)
+    oml = str(tmp / "%(id)s.wav" if audio_only else "%(id)s.%(ext)s")
     opt = {
         "format": "bestaudio*" if audio_only else "bestvideo*+bestaudio/best",
         "noplaylist": True,
-        "outtmpl": str(tmp / "%(id)s.%(ext)s"),
+        "outtmpl": oml,
         "prefer_ffmpeg": True,
     }
     if audio_only:
@@ -25,7 +26,7 @@ def download(url: str, audio_only: bool, state: List[str]) -> Tuple[str, List[st
         ]
     with YoutubeDL(opt) as dl:
         info = dl.extract_info(url, download=True)
-        fp = dl.prepare_filename(info)
+        fp = dl.prepare_filename(info, outtmpl=oml)
     state.append(fp)
     return fp, state
 
