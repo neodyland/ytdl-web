@@ -65,4 +65,4 @@ with gr.Blocks(title="Simple Youtube Downloader GUI") as demo:
     audio.change(lambda: "", [], [path])
     url.change(lambda: "", [], [path])
 
-demo.launch(server_name="0.0.0.0", server_port=7860, show_api=False)
+demo.launch(server_name="0.0.0.0", server_port=7860, show_api=True)
